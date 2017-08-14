@@ -7,13 +7,13 @@
 
 # Site Settings
 locale                   : "en"
-title                    : "Site Title"
+title                    : "Shyngys Kassymov"
 title_separator          : "-"
-name                     : "Your Name"
-description              : "An amazing website."
-url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+name                     : "Shyngys Kassymov"
+description              : "Personal website of Shyngys Kassymov."
+url                      : "https://chika-kasymov.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+repository               : "chika-kasymov/chika-kasymov.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
@@ -77,10 +77,10 @@ analytics:
 
 # Site Author
 author:
-  name             : "Your Name"
+  name             : "Shyngys Kassymov"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an amazing person."
-  location         : "Somewhere"
+  bio              : "I'm an iOS developer at Toptal"
+  location         : "Ust-Kamenogorsk, Kazakhstan"
   email            :
   uri              :
   bitbucket        :
@@ -179,7 +179,7 @@ timezone: # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
 # Plugins
-gems:
+plugins:
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
@@ -242,6 +242,6 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      comments: # true
+      comments: true
       share: true
       related: true
