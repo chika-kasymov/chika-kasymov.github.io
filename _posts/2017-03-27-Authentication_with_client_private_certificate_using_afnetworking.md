@@ -1,5 +1,4 @@
 ---
-layout: single
 title:  "Authentication with client private certificate using AFNetworking"
 date:   2017-03-27 00:00:00
 description: Useful code snippet for authentication with client private certificate using AFNetworking.
@@ -11,8 +10,6 @@ comments: true
 ---
 
 In this post, I want to share useful code snippet for authentication with client private certificate using [AFNetworking](https://github.com/AFNetworking/AFNetworking). This is a combined solution which is built from few existing solutions found on [Github](https://github.com).
-
-___
 
 Authentication is one of the most crucial parts of many iOS applications. In some cases, the application needs to do it using client private certificate.
 
@@ -63,7 +60,7 @@ if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthent
 
 I kept the original comments because think they explain what is done here very well. In brief, this `if` statement checks trust or not to the server you are talking with and passes the credentials from Keychain if the trust is OK or is unspecified.
 
-Next `if` statement will check if authentication challenge is asking for the client certificate. If it is, we just pass user certificate credentials.
+The next `if` statement will check if authentication challenge is asking for the client certificate. If it is, we just pass user certificate credentials.
 
 ``` objc
 if ([[challenge protectionSpace] authenticationMethod] == NSURLAuthenticationMethodClientCertificate) {
@@ -154,8 +151,6 @@ AFHTTPSessionManager *clientManager; // your API client
 }];
 ```
 
-___
+## Useful links
 
-Useful links:
-
-* [Main reference](https://github.com/AFNetworking/AFNetworking/issues/2316) - it is the link of [Github](https://github.com) issue with a couple of code snippets written in older versions of [AFNetworking](https://github.com/AFNetworking/AFNetworking).
+* [The main reference](https://github.com/AFNetworking/AFNetworking/issues/2316) - it is the link of [Github](https://github.com) issue with a couple of code snippets written in older versions of [AFNetworking](https://github.com/AFNetworking/AFNetworking).

@@ -1,5 +1,4 @@
 ---
-layout: single
 title:  "UITextField & Auto Suggestion"
 date:   2017-01-29 00:00:00
 description: Tutorial on making simple auto suggestion feature for UITextField.
@@ -11,35 +10,30 @@ permalink: uitextfield_and_auto_suggestion
 comments: true
 ---
 
-One of the time consuming parts of any application for users are text fields. To save invaluable time for users it's often good idea to provide helper tools for them. In this article I gonna show you how to make auto suggestion feature for `UITextField`. For instance, we can use it as additional feature for search field.
+One of the time-consuming parts of any application for users is text fields. To save invaluable time for users it's often a good idea to provide helper tools for them. In this article, I gonna show you how to make auto suggestion feature for `UITextField`. For instance, we can use it as the additional feature for the search field.
 
-___
+{% include toc %}
 
-### Contents
-1. [Quick Introduction](#intro)
-2. [Implementation](#implementation)
-3. [Conclusion](#conclusion)
-
-## 1. Quick Introduction <a id="intro"></a>
+## Quick Introduction
 
 To interest you, that's how the final project will look like:
 
-![Final auto suggestion feature]({{ site.url }}/assets/images/auto_suggestion.gif)
+![Final auto suggestion feature](/assets/images/auto_suggestion.gif)
 
-In the beginning let's define what our auto suggestion feature will do:
+In the beginning, let's define what our auto suggestion feature will do:
 
-* Auto suggestion will appear and disapepar when user will begin and end typing to `UITextField` accordingly. 
-* Data to be shown as suggestions will be taken from local source or by network.
-* Communcation between auto suggestion and `UIViewController` will be through protocol.
-* UI will consists from:
-	* `UIView` container for `UITableView` to set rounded corners for two sides instead all four sides
+* The auto suggestion will appear and disappear when user will begin and end typing to `UITextField` accordingly. 
+* Data to be shown as suggestions will be taken from a local source or by the network.
+* Communication between auto suggestion and `UIViewController` will be through a protocol.
+* UI will consist from:
+	* `UIView` container for `UITableView` to set rounded corners on two sides instead all four sides
 	* `UITableView` to show the list of suggestions
 	* `UIActivityIndicatorView` to show loading state, if we need to make network connection
 	* Two `UIView` for dim effect (One to darken and disable other parts of the screen, second for loading state of `UITableView`)
 
-## 2. Implementation <a id="implementation"></a>
+## Implementation
 
-Let's create new category for `UITextField` called **AutoSuggestion**. This will make our solution for this problem more flexible. Alternatively you can create subclass of `UITextField` if you think auto suggestion feature is too big for category.
+Let's create the new category for `UITextField` called **AutoSuggestion**. This will make our solution for this problem more flexible. Alternatively, you can create a subclass of `UITextField` if you think auto suggestion feature is too big for a category.
 
 ``` objc
 //  UITextField+AutoSuggestion.h
@@ -56,7 +50,7 @@ Let's create new category for `UITextField` called **AutoSuggestion**. This will
 @end
 ```
 
-Next we need to add some properties. By default in Objective-C categories can not contain properties, but we can achieve that by using `<objc/runtime.h>` library. It creates properties on runtime, Captain Obvious :).
+Next, we need to add some properties. By default in Objective-C categories can not contain properties, but we can achieve that by using `<objc/runtime.h>` library. It creates properties on runtime, Captain Obvious :)
 
 ``` objc
 // inside @interface in UITextField+AutoSuggestion.h
@@ -78,7 +72,7 @@ Next we need to add some properties. By default in Objective-C categories can no
 
 Explanation:
 
-1. `tableContainerView` is a view to hold our `UITableView`. We will set rounded corners on two sides instead of four by applying mask to view using `UIBezierPath`. If we set rounded corners by this strategy to `UITableView` instead than part of `UITableView` will not be seen while scrolling.
+1. `tableContainerView` is a view to hold our `UITableView`. We will set rounded corners on two sides instead of four by applying the mask to view using `UIBezierPath`. If we set rounded corners by this strategy to `UITableView` instead than part of `UITableView` will not be seen while scrolling.
 2. This is our `UITableView` to present data.
 3. `tableAlphaView` will be used to show loading state effect.
 4. `spinner` also will be used to show loading state effect.
@@ -89,7 +83,7 @@ Explanation:
 9. `fieldIdentifier` helper variable to differentiate fields.
 10. `maxNumberOfRows` is a variable to provide maximum number of rows to show in suggestion view instead of default number.
 
-Now to finish we need to provide getters and setters using `<objc/runtime.h>` which will be used on runtime. Below are few examples how it can be achieved for variables of type `BOOL`, `CGRect` and `UITableView`:
+Now to finish we need to provide getters and setters using `<objc/runtime.h>` which will be used at runtime. Below are few examples how it can be achieved for variables of type `BOOL`, `CGRect`, and `UITableView`:
 
 ``` objc
 // in UITextField+AutoSuggestion.m
@@ -167,11 +161,11 @@ Next steps are to present suggestion view. Therefore we need to calculate positi
 ```
 Explanation:
 
-1. We define `observeTextFieldChanges()` method in header file, because we need to start observe changes in `UITextField` from other places.
-2. Also this method will be extended in next steps. For now it only contains line to observe changes for `UIKeyboardDidShowNotification` notifications.
-3. To get frame of keyboard we need to get it's value from dictionary by key named `UIKeyboardFrameBeginUserInfoKey`.
+1. We define `observeTextFieldChanges()` method in the header file because we need to start observing changes in `UITextField` from other places.
+2. Also, this method will be extended in next steps. For now, it only contains the line to observe changes for `UIKeyboardDidShowNotification` notifications.
+3. To get the frame of the keyboard we need to get its value from the dictionary by key named `UIKeyboardFrameBeginUserInfoKey`.
 
-Next step is to implement logic of showing and hiding suggestions view.
+Next step is to implement the logic of showing and hiding suggestions view.
 
 ``` objc
 // in UITextField+AutoSuggestion.m
@@ -335,17 +329,17 @@ Next step is to implement logic of showing and hiding suggestions view.
 Explanation:
 
 1. Add extra observers to handle `UITextField` changes.
-2. In this method we create all base views and setting initial frames.
+2. In this method, we create all base views and setting initial frames.
 3. Method to show suggestion view.
 4. Method to hide suggestion view.
 5. Use above two methods to toggle between states.
 6. This method calls other methods to recalculate suggestion view frame, update corners and set text if data is empty.
-7. In this method we decide where suggestion view should be show (above or below) and also calculate size.
-8. This method used to set corners on top or bottom regarding to position of suggestion view.
+7. In this method, we decide where suggestion view should be shown (above or below) and also calculate the size.
+8. This method used to set corners on top or bottom regarding the position of suggestion view.
 9. Helper method to set text if data is empty.
 10. Another helper method to decide where to show suggestion view.
 
-Sorry, if too many code are present. I've very little experience in writing tutorials. I hope you will understand and forgive me :).
+Sorry, if too many lines of code are present. I've very little experience in writing tutorials. I hope you will understand and forgive me :).
 
 Now we need to implement `UITableViewDatasource` and `UITableViewDelegate` protocols but before let's define our own. It will be used to interact with outer classes. Data to be shown will be passed through the protocol and also it will notify when something changed.
 
@@ -378,13 +372,13 @@ Now we need to implement `UITableViewDatasource` and `UITableViewDelegate` proto
 
 Explanation:
 
-1. Using this method developers will have opportunity to provide their custom designed cells.
-2. This method will ask number of suggestion to show.
+1. Using this method developers will have an opportunity to provide their custom designed cells.
+2. This method will ask the number of suggestions to show.
 3. This and below two methods are optional. We can use this method to handle field changes.
-4. Custom height for `UITableViewCell`. By default height is 44 points.
-5. Do something if cell was selected.
+4. Custom height for `UITableViewCell`. By default, height is 44 points.
+5. Do something if the cell was selected.
 6. This is a variable to store our data source.
-7. Again we must define getter and setter for new property.
+7. Again we must define getter and setter for the new property.
 
 Let's now implement `UITableViewDatasource` and `UITableViewDelegate` methods combining with our own protocol.
 
@@ -446,12 +440,12 @@ Let's now implement `UITableViewDatasource` and `UITableViewDelegate` methods co
 
 Explanation:
 
-1. Number of sections always will be 1.
-2. Number of rows will be asked from `UITextField` data source we created. If not implemented, assert will stop application and show error message.
+1. The number of sections always will be 1.
+2. The number of rows will be asked from `UITextField` data source we created. If not implemented, assert will stop the application and show the error message.
 3. The same as above but instead this method will ask for `UITableViewCell`.
 4. Height for cells. By default is `DEFAULT_ROW_HEIGHT` which is equal to 44 points.
 5. This method will hide auto suggestion view and call data source method if implemented.
-6. In above code snippets we already implemented this method. Now we extend it by adding our data source to it. Data source method will be fired if implemented.
+6. In above code snippets, we already implemented this method. Now we extend it by adding our data source to it. Data source method will be fired if implemented.
 
 And the last step is to add loading state.
 
@@ -488,7 +482,7 @@ And the last step is to add loading state.
 }
 ```
 
-To use these category we should specify which class will conform to data source and implement it's methods.
+To use this category we should specify which class will conform to the data source and implement its methods.
 
 For example in demo project it looks like this:
 
@@ -545,19 +539,19 @@ For example in demo project it looks like this:
 
 Explanation:
 
-1. Conforming to protocol of our category.
+1. Conforming to the protocol of our category.
 2. Setting which field should have auto suggestion feature and calling `observeTextFieldChanges()` method to start observing changes.
 
 Steps **3**, **4**, **5** and **6** and just implementations of data source methods.
 
 That's it! It was good experience writing our own `UITextField` category.
 
-## 3. Conclusion <a id="conclusion"></a>
+## Conclusion
 
-As we can see categories are powerful feature of Objective-C language. By using it we can extend functionality of any base API class.
+As we can see categories are the powerful feature of the Objective-C language. By using it we can extend the functionality of any base API class.
 
-But they should be used carefully. For example, when I firstly implemented auto suggestion feature I implemented `dealloc` method. After that strange memory crashes occurred. Which means do not override `dealloc` method in categories.
+But they should be used carefully. For example, when I first implemented auto suggestion feature I implemented the `dealloc` method. After that, strange memory crashes occurred. Which means - do not override `dealloc` method in categories.
 
 Thank you for your attention!
 
-**PS:** Full code can be found by this [link](https://github.com/chika-kasymov/UITextField_AutoSuggestion).
+**PS:** Full code can be found at this [link](https://github.com/chika-kasymov/UITextField_AutoSuggestion).
