@@ -21,6 +21,8 @@ I couldn't find the one solution which fully solves my problems. Therefore in th
 
 #import <UIKit/UIKit.h>
 
+#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
 @interface UIViewController (UIBarButtonItemFrame)
 
 - (CGRect)frameForNavBarItem:(UIBarButtonItem *)item;
@@ -49,9 +51,26 @@ I couldn't find the one solution which fully solves my problems. Therefore in th
     }
 }
 
-- (CGRect)frameForNavBarItem:(UIBarButtonItem *)item {
+- (NSArray<UIControl *> *)buttonsForView:(UIView *)view {
     NSMutableArray *buttons = [[NSMutableArray alloc] init];
-    [self buttonsForView:self.navigationController.navigationBar buttons:buttons];
+    [self buttonsForView:view buttons:buttons];
+
+    if (SYSTEM_VERSION_LESS_THAN(@"11.0")) {
+        [buttons sortUsingComparator:^NSComparisonResult(UIControl *obj1, UIControl *obj2) {
+            if (obj1.frame.origin.x > obj2.frame.origin.x) {
+                return NSOrderedDescending;
+            } else if (obj1.frame.origin.x < obj2.frame.origin.x) {
+                return NSOrderedAscending;
+            }
+            return NSOrderedSame;
+        }];
+    }
+
+    return buttons;
+}
+
+- (CGRect)frameForNavBarItem:(UIBarButtonItem *)item {
+    NSArray<UIControl *> *buttons = [self buttonsForView:self.navigationController.navigationBar];
 
     NSMutableArray *items = [NSMutableArray new];
     [items addObjectsFromArray:self.navigationItem.leftBarButtonItems];
@@ -67,8 +86,7 @@ I couldn't find the one solution which fully solves my problems. Therefore in th
 }
 
 - (CGRect)frameForToolbarItem:(UIBarButtonItem *)item flexibleSpaceItem:(UIBarButtonItem *)flexibleSpaceItem {
-    NSMutableArray *buttons = [[NSMutableArray alloc] init];
-    [self buttonsForView:self.navigationController.toolbar buttons:buttons];
+    NSArray<UIControl *> *buttons = [self buttonsForView:self.navigationController.toolbar];
 
     NSMutableArray *toolbarItems = [NSMutableArray arrayWithArray:self.toolbarItems];
     NSMutableArray *itemsToRemove = [NSMutableArray new];
@@ -93,8 +111,9 @@ I couldn't find the one solution which fully solves my problems. Therefore in th
 
 1. `- (CGRect)frameForView:(UIView *)view;` - This method is straightforward. It returns the frame of `UIView` in device screen space.
 2. `- (void)buttonsForView:(UIView *)view buttons:(NSMutableArray<UIView *> *)buttons;` - This method takes `UINavigationBar` or `UIToolbar` instance as a parameter and then iterates through their subviews until finds all subviews of `UIControl` subclass. In other words, this method will find all views of `UIBarButtonItem`s.
-3. `- (CGRect)frameForNavBarItem:(UIBarButtonItem *)item` - This method takes a parameter of type `UIBarButtonItem`, then calls our second method to get all views of `UIBarButtonItem`s of `UINavigationBar`. After the method combines `leftBarButtonItems` and `rightBarButtonItems` to one array. Note that `rightBarButtonItems` are reversed, this decision was made after testing. Then the method simply tries to get the index of input `UIBarButtonItem` instance in the combined array, and if it is found and the index is smaller than the size of the array of views of `UIBarButtonItem`s in `UINavigationBar` the method returns the corresponding view. Otherwise, the frame of whole `UINavigationBar` is returned.
-4. `- (CGRect)frameForToolbarItem:(UIBarButtonItem *)item flexibleSpaceItem:(UIBarButtonItem *)flexibleSpaceItem` - This method is almost identical to 3rd one. The difference is that it takes `UIToolbar` to find views of `UIBarButtonItem`s, and also removes unneeded `UIBarButtonItem`s from `toolbarItems`. In my case, it was `UIBarButtonItem` with the type of `UIBarButtonSystemItemFlexibleSpace`. You can have another one(s).
+3. `- (void)buttonsForView:(UIView *)view` - This method calls the previous one and returns the list of views in sorted order by x-axis.
+4. `- (CGRect)frameForNavBarItem:(UIBarButtonItem *)item` - This method takes a parameter of type `UIBarButtonItem`, then calls our third method to get all views of `UIBarButtonItem`s of `UINavigationBar`. After the method combines `leftBarButtonItems` and `rightBarButtonItems` to one array. Note that `rightBarButtonItems` are reversed, this decision was made after testing. Then the method simply tries to get the index of input `UIBarButtonItem` instance in the combined array, and if it is found and the index is smaller than the size of the array of views of `UIBarButtonItem`s in `UINavigationBar` the method returns the corresponding view. Otherwise, the frame of whole `UINavigationBar` is returned.
+5. `- (CGRect)frameForToolbarItem:(UIBarButtonItem *)item flexibleSpaceItem:(UIBarButtonItem *)flexibleSpaceItem` - This method is almost identical to 3rd one. The difference is that it takes `UIToolbar` to find views of `UIBarButtonItem`s, and also removes unneeded `UIBarButtonItem`s from `toolbarItems`. In my case, it was `UIBarButtonItem` with the type of `UIBarButtonSystemItemFlexibleSpace`. You can have another one(s).
 
 Another thing to note is that I had a logic where `UINavigationBar` or `UIToolbar` items were changed over time. When I called the above methods after changing `UIBarButtonItem` list I noticed that the views were not created immediately (or maybe had zero frames). Therefore in that scenario, you will want to call methods to update the layout of `UINavigationBar` or `UIToolbar` before calling above methods. For example, like this:
 ``` objc
