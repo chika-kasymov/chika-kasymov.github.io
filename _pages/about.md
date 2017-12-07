@@ -10,19 +10,21 @@ Currently, I am working for [Toptal][tt] company and build iOS apps and librarie
 
 Some of the projects made by me:
 
-- [MP.kz][mpkz]
-- [Balance Onay][onay]
+- [Tooth Morph][tooth_morph]
 - [Bank Astana for Business][bafc]
 - [Today.kz][today]
 - [Dealy][dealy]
+- [MP.kz][mpkz]
+- Balance Onay
 
 A few projects to which I contributed:
 
 - [Bank Astana][baf]
-- [Asia Credit Bank][acb]
-- [Курсы валют для Казахстана][kursy]
-- [Zenge][zenge]
 - [Sajda][sajda]
+- [Zenge][zenge]
+- [YIZOOT][yizoot]
+- [Курсы валют для Казахстана][kursy]
+- [Asia Credit Bank][acb]
 
 ### Contact me
 
@@ -32,7 +34,6 @@ Find me on [Github][github] / [Facebook][facebook] or just say `Hello` at
 
 [tt]: https://toptal.com
 [mpkz]: https://itunes.apple.com/kz/app/mp.kz-tendery-i-goszakupki/id788493002?mt=8
-[onay]: https://itunes.apple.com/ru/app/balans-o-aj/id1108282439?l=en&mt=8
 [bafc]: https://itunes.apple.com/kz/app/bank-astany-dla-biznesa/id1085029101?mt=8
 [today]: https://itunes.apple.com/de/app/today.kz-novosti/id1110063845?mt=8
 [dealy]: https://itunes.apple.com/us/app/dealy/id1079442840?mt=8
@@ -44,3 +45,5 @@ Find me on [Github][github] / [Facebook][facebook] or just say `Hello` at
 [github]: https://github.com/chika-kasymov
 [facebook]: https://www.facebook.com/shyngys.kassymov
 [email]: mailto:chika.kasymov@gmail.com
+[tooth_morph]: https://itunes.apple.com/us/app/tooth-morph/id1260140885?mt=8
+[yizoot]: https://itunes.apple.com/us/app/yizoot-ar/id1252234700?mt=8
