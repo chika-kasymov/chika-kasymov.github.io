@@ -32,7 +32,7 @@ Find me on [Github][github] / [Facebook][facebook] or just say `Hello` at
 [chika.kasymov@gmail.com][email].
 
 
-[tt]: https://toptal.com
+[tt]: https://www.toptal.com/#consider-just-tested-computer-engineers-now
 [mpkz]: https://itunes.apple.com/kz/app/mp.kz-tendery-i-goszakupki/id788493002?mt=8
 [bafc]: https://itunes.apple.com/kz/app/bank-astany-dla-biznesa/id1085029101?mt=8
 [today]: https://itunes.apple.com/de/app/today.kz-novosti/id1110063845?mt=8
