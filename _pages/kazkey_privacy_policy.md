@@ -2,6 +2,8 @@
 title: "KazKey Privacy Policy"
 description: KazKey Privacy Policy
 permalink: kazkey/privacy_policy
+sitemap: false
+author_profile: false
 ---
 
 # Privacy Policy
