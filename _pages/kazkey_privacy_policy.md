@@ -6,8 +6,6 @@ sitemap: false
 author_profile: false
 ---
 
-# Privacy Policy
-
 This Privacy Policy governs the manner in which KazKey collects, uses, maintains and discloses information collected from users (each, a “User”) of the KazKey app. This privacy policy applies to the app and all products and services offered in KazKey app.
 
 ## Personal identification information
