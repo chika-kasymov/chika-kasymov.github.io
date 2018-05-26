@@ -6,7 +6,7 @@ permalink: about
 
 Hi, I'm Shyngys, and I live in Ust-Kamenogorsk (Kazakhstan). Thanks for visiting my website.
 
-Currently, I am working for [Toptal][tt] company and build iOS apps and libraries using both Objective-C and Swift programming languages.
+Currently, I am working at [The Life House Group][life_house] company and build iOS apps and libraries using both Objective-C and Swift programming languages.
 
 Some of the projects made by me:
 
@@ -32,6 +32,7 @@ Find me on [Github][github] / [Facebook][facebook] or just say `Hello` at
 [chika.kasymov@gmail.com][email].
 
 
+[life_house]: https://friends.life-house.com/?from=c6480f38-a2d3-34c4-bfd6-915ac36475a6
 [tt]: https://www.toptal.com/#consider-just-tested-computer-engineers-now
 [mpkz]: https://itunes.apple.com/kz/app/mp.kz-tendery-i-goszakupki/id788493002?mt=8
 [bafc]: https://itunes.apple.com/kz/app/bank-astany-dla-biznesa/id1085029101?mt=8
