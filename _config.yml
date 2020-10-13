@@ -5,7 +5,7 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # `jekyll serve`. If you change this file, please restart the server process.
 
-minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en"
@@ -65,9 +65,9 @@ naver_site_verification  :
 twitter:
   username               : "1_c_h_I_k_a_1"
 facebook:
-  username               : "shyngys.kassymov"
-  app_id                 : "256033631574986"
-  publisher              : "The Blog of Shyngys Kassymov"
+  username               :
+  app_id                 :
+  publisher              :
 og_image                 : # Open Graph/Twitter default site image
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
@@ -95,7 +95,7 @@ author:
   codepen          :
   dribbble         :
   flickr           :
-  facebook         : "shyngys.kassymov"
+  facebook         :
   foursquare       :
   github           : "chika-kasymov"
   gitlab           :
@@ -274,5 +274,5 @@ defaults:
   #     author_profile: false
   #     share: true
 
-remote_theme: "mmistakes/minimal-mistakes"
-minimal_mistakes_skin: "default" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum" "sunrise"
+remote_theme: "mmistakes/minimal-mistakes@4.20.2"
+minimal_mistakes_skin: "dark" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum" "sunrise"
